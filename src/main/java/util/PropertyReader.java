@@ -5,11 +5,23 @@ import lombok.SneakyThrows;
 
 public class PropertyReader {
 
+    public static String getKey() {
+        return PropertyReader.getProperties("properties/conf.properties").get("trelloKey").toString();
+    }
+
+    public static String getToken() {
+        return PropertyReader.getProperties("properties/conf.properties").get("trelloToken").toString();
+    }
+
+    public static String getBaseUrl() {
+        return PropertyReader.getProperties("properties/test.properties").get("BASE_URL").toString();
+    }
+
+
     @SneakyThrows
-    public static Properties getProperties() {
+    private static Properties getProperties(String path) {
         Properties properties = new Properties();
-        String propertyFileName = "conf.properties";
-        properties.load(PropertyReader.class.getClassLoader().getResourceAsStream(propertyFileName));
+        properties.load(PropertyReader.class.getClassLoader().getResourceAsStream(path));
         return properties;
     }
 }

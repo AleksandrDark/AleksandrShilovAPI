@@ -1,6 +1,5 @@
 package service;
 
-import com.google.gson.GsonBuilder;
 import dto.CardTrelloDTO;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
@@ -9,18 +8,12 @@ import util.URI;
 
 public class CardTrelloService extends CommonService {
 
-    private CardTrelloDTO parseCardTrello(Response response) {
-        return new GsonBuilder()
-            .create()
-            .fromJson(response.getBody().asString(), CardTrelloDTO.class);
-    }
-
     public CardTrelloDTO createCardTrello(Map<String, String> params) {
-        return parseCardTrello(requestWithParams(Method.POST, URI.ENDPOINT_CARD, params));
+        return parseDTOTrello(requestWithParams(Method.POST, URI.ENDPOINT_CARD, params), CardTrelloDTO.class);
     }
 
     public CardTrelloDTO getCardTrello(String idCard) {
-        return parseCardTrello(requestNoParams(Method.GET, URI.ENDPOINT_CARD + idCard));
+        return parseDTOTrello(requestNoParams(Method.GET, String.format(URI.ENDPOINT_CARD, idCard)), CardTrelloDTO.class);
     }
 
     public Response deleteCardTrello(String idCard) {

@@ -7,15 +7,19 @@ import data.DataTest;
 public class TrelloTest extends BaseTest {
 
     @Test
-    public void checkBoardCreatedAndGettingAndDeleted() {
-        String idBoard = boardTrelloDTO.getId();
-        boardTrelloDTO = boardTrelloService.getBoardTrello(idBoard);
+    public void checkBoardCreated() {
+        boardParams.put("name", DataTest.BOARD_NAME);
+        boardTrelloDTO = boardTrelloService.createBoardTrello(boardParams);
         assertionsTrello.checkBoardName(boardTrelloDTO, DataTest.BOARD_NAME);
     }
 
     @Test
-    public void checkCreatedAndUpdatedBoard() {
+    public void checkUpdatedBoard() {
+        boardParams.put("name", DataTest.BOARD_NAME);
+        boardTrelloDTO = boardTrelloService.createBoardTrello(boardParams);
         String idBoard = boardTrelloDTO.getId();
+        boardTrelloService.getBoardTrello(idBoard);
+        System.out.println(boardTrelloService);
         boardParams.put("name", DataTest.NEW_NAME_BOARD);
         boardTrelloDTO = boardTrelloService.updateBoardTrello(boardParams, idBoard);
         assertionsTrello.checkBoardName(boardTrelloDTO, DataTest.NEW_NAME_BOARD);
@@ -23,6 +27,8 @@ public class TrelloTest extends BaseTest {
 
     @Test
     public void checkCreatedList() {
+        boardParams.put("name", DataTest.BOARD_NAME);
+        boardTrelloDTO = boardTrelloService.createBoardTrello(boardParams);
         String idBoard = boardTrelloDTO.getId();
         listParams.put("name", DataTest.LIST_NAME);
         listParams.put("idBoard", idBoard);
@@ -32,6 +38,8 @@ public class TrelloTest extends BaseTest {
 
     @Test
     public void checkUpdatedList() {
+        boardParams.put("name", DataTest.BOARD_NAME);
+        boardTrelloDTO = boardTrelloService.createBoardTrello(boardParams);
         String idBoard = boardTrelloDTO.getId();
         listParams.put("name", DataTest.LIST_NAME);
         listParams.put("idBoard", idBoard);
@@ -44,6 +52,8 @@ public class TrelloTest extends BaseTest {
 
     @Test
     public void checkCreatedListAndCardDeleteCard() {
+        boardParams.put("name", DataTest.BOARD_NAME);
+        boardTrelloDTO = boardTrelloService.createBoardTrello(boardParams);
         String idBoard = boardTrelloDTO.getId();
         listParams.put("name", DataTest.LIST_NAME);
         listParams.put("idBoard", idBoard);
