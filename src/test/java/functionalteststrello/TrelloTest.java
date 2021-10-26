@@ -18,8 +18,6 @@ public class TrelloTest extends BaseTest {
         boardParams.put("name", DataTest.BOARD_NAME);
         boardTrelloDTO = boardTrelloService.createBoardTrello(boardParams);
         String idBoard = boardTrelloDTO.getId();
-        boardTrelloService.getBoardTrello(idBoard);
-        System.out.println(boardTrelloService);
         boardParams.put("name", DataTest.NEW_NAME_BOARD);
         boardTrelloDTO = boardTrelloService.updateBoardTrello(boardParams, idBoard);
         assertionsTrello.checkBoardName(boardTrelloDTO, DataTest.NEW_NAME_BOARD);
