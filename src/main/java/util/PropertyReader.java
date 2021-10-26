@@ -4,7 +4,7 @@ import java.util.Properties;
 import lombok.SneakyThrows;
 
 public class PropertyReader {
-    private static Properties prop = getProperties();
+    private static final Properties prop = getProperties();
 
     public static String getKey() {
         return prop.get("trelloKey").toString();
